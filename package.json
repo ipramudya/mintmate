@@ -1,4 +1,9 @@
 {
+  "author": {
+    "name": "Pramudya Tamir Indra Permana",
+    "email": "ipramudya.dev@gmail.com",
+    "url": "https://pramudyatamir.web.app"
+  },
   "name": "mintmate",
   "version": "0.1.0",
   "private": true,
