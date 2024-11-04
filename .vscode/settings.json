@@ -1,0 +1,18 @@
+{
+    "tailwindCSS.experimental.classRegex": [
+        ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
+    ],
+    "editor.tabSize": 2,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.quickSuggestions": {
+        "other": "on",
+        "comments": "off",
+        "strings": true
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "never",
+        "source.addMissingImports": "never"
+    },
+    "editor.formatOnSave": true
+}
