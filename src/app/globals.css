@@ -3,11 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
+    --text-strong: #171717;
+    --text-low: #404040;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+    color: var(--foreground);
+    background: var(--background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong {
+    color: var(--text-strong);
+}
+
+p,
+span,
+ul,
+ol,
+li,
+a {
+    color: var(--text-low);
 }

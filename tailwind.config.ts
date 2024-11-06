@@ -9,7 +9,7 @@ const config: Config = {
                 foreground: "var(--foreground)"
             },
             fontFamily: {
-                sans: ["var(--font-univers)"]
+                sans: ["var(--font-geist-sans)"]
             }
         }
     },
