@@ -23,7 +23,9 @@ export function Nav({ children, className }: Props) {
             <div className="flex w-full items-center justify-between">
                 {/* right side */}
                 <div className="flex items-center gap-2 md:gap-4">
-                    <h1 className="text-2xl font-bold uppercase">mnnt</h1>
+                    <Link href="/">
+                        <h1 className="text-2xl font-bold uppercase">mnnt</h1>
+                    </Link>
                     <Link
                         href="/gallery"
                         className="inline-flex h-9 items-center justify-center rounded-full px-4 text-sm capitalize text-neutral-700 transition duration-300 hover:bg-neutral-100"

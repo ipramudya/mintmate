@@ -6,7 +6,7 @@ import { tv, type VariantProps } from "tailwind-variants";
 
 const variants = tv({
     base: [
-        "peer flex rounded-md border py-2 text-neutral-900",
+        "peer flex w-full rounded-md border py-2 text-neutral-900",
         "focus-visible:outline-dashed focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-neutral-400",
         "placeholder:text-neutral-300 disabled:cursor-not-allowed"
     ],
