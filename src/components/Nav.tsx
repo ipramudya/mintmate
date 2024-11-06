@@ -16,23 +16,23 @@ export function Nav({ children, className }: Props) {
     return (
         <nav
             className={cn(
-                "sticky left-0 top-0 mx-auto flex h-16 max-w-screen-lg items-center justify-center",
+                "sticky left-0 top-0 mx-auto flex h-16 max-w-screen-lg items-center justify-center bg-white px-2 md:px-4",
                 className
             )}
         >
             <div className="flex w-full items-center justify-between">
                 {/* right side */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
                     <h1 className="text-2xl font-bold uppercase">mnnt</h1>
                     <Link
                         href="/gallery"
-                        className="inline-flex h-9 items-center justify-center rounded-full px-4 text-sm capitalize text-neutral-700 transition duration-300 hover:bg-neutral-50"
+                        className="inline-flex h-9 items-center justify-center rounded-full px-4 text-sm capitalize text-neutral-700 transition duration-300 hover:bg-neutral-100"
                     >
                         gallery
                     </Link>
                 </div>
                 {/* left side */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4">
                     <Button color="secondary" onClick={() => router.push("/mint")}>
                         Mint
                     </Button>
