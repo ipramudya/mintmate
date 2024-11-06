@@ -35,7 +35,7 @@ export function Nav({ children, className }: Props) {
                 </div>
                 {/* left side */}
                 <div className="flex items-center gap-2 md:gap-4">
-                    <Button color="secondary" onClick={() => router.push("/mint")}>
+                    <Button color="secondary" onClick={() => router.push("/mint/nft/upload")}>
                         Mint
                     </Button>
                     {/* `children` rendered as profile button or connect button */}

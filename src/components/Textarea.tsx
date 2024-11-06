@@ -1,12 +1,10 @@
-"use client";
-
 import { cn } from "@/utils";
 import * as React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const variants = tv({
     base: [
-        "peer flex w-full rounded-md border py-2 text-neutral-900",
+        "peer flex min-h-[100px] w-full rounded-md border py-2 text-neutral-900",
         "focus-visible:outline-dashed focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-neutral-400",
         "placeholder:text-neutral-300 disabled:cursor-not-allowed"
     ],
@@ -17,8 +15,8 @@ const variants = tv({
             secondary: "border-neutral-200 bg-white"
         },
         dimensions: {
-            default: "h-9 px-3 text-sm",
-            lg: "h-12 px-4 text-base"
+            default: "px-3 text-sm",
+            lg: "px-4 text-base"
         }
     },
     defaultVariants: {
@@ -30,15 +28,15 @@ const variants = tv({
 type ColorProps = VariantProps<typeof variants>["color"];
 type DimensionsProps = VariantProps<typeof variants>["dimensions"];
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
     color?: ColorProps;
     dimensions?: DimensionsProps;
 }
 
-export const InputField = React.forwardRef<HTMLInputElement, Props>(
+export const Textarea = React.forwardRef<HTMLTextAreaElement, Props>(
     ({ className, color, dimensions, ...props }, ref) => {
         return (
-            <input
+            <textarea
                 className={cn(variants({ color, dimensions }), className)}
                 ref={ref}
                 {...props}
@@ -47,4 +45,4 @@ export const InputField = React.forwardRef<HTMLInputElement, Props>(
     }
 );
 
-InputField.displayName = "Input";
+Textarea.displayName = "Textarea";

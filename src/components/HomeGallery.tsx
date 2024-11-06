@@ -1,6 +1,6 @@
 "use client";
 
-import { DummyNFTGallery } from "@/data/gallery-dummy";
+import { DummyNFTGallery } from "@/data/galleryDummy";
 import { useMediaQuery } from "@/hooks";
 import useEmblaCarousel from "embla-carousel-react";
 import { type PropsWithChildren } from "react";

@@ -1,5 +1,5 @@
 import { GalleryCardItem, InputField } from "@/components";
-import { DummyNFTGallery } from "@/data/gallery-dummy";
+import { DummyNFTGallery } from "@/data/galleryDummy";
 
 export default function GalleryPage() {
     return (
