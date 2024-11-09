@@ -8,11 +8,11 @@ import { GalleryCardItem } from "./GalleryCardItem";
 
 const MOBILE_BREAKPOINT = "only screen and (max-width : 640px)";
 
-const CAROUSEL_OPTIONS = {
+const CAROUSEL_OPTIONS: Parameters<typeof useEmblaCarousel>[0] = {
     dragFree: true,
     startIndex: 0,
     slidesToScroll: 1
-} satisfies Parameters<typeof useEmblaCarousel>[0];
+};
 
 const MobileGallery = () =>
     DummyNFTGallery.map((item, index) => (
