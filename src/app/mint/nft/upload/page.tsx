@@ -4,10 +4,12 @@ import { Button, Icon } from "@/components";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone, type DropzoneOptions, type FileRejection } from "react-dropzone";
+import { toast } from "sonner";
 
 type FileWithPreview = File & { preview: string };
 
-const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB in bytes
+// const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB in bytes
+const MAX_FILE_SIZE = 100 * 1024; // 20MB in bytes
 const DROPZONE_OPTIONS: DropzoneOptions = {
     maxSize: MAX_FILE_SIZE,
     multiple: false,
@@ -38,10 +40,11 @@ export default function UploadPage() {
             );
         }
 
+        // Alert every-single file, and errors if any
         if (fileRejections.length > 0) {
             fileRejections.forEach((file) => {
                 file.errors.forEach((error) => {
-                    console.log(error.message);
+                    toast.error(error.message);
                 });
             });
         }
