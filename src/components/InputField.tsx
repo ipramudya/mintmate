@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils";
+import { cn } from "@/lib";
 import * as React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 

@@ -6,7 +6,7 @@ export * from "./InputLabel";
 export * from "./Nav";
 export * from "./Textarea";
 
-export * from "./ConnectButton";
 export * from "./GalleryCardItem";
 export * from "./HomeGallery";
 export * from "./MintStepper";
+export * from "./WalletButtonRenderer";

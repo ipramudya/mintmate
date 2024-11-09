@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils";
+import { cn } from "@/lib";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type PropsWithChildren } from "react";

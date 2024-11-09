@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/utils";
+import { cn } from "@/lib";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const variants = tv({

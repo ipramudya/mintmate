@@ -23,7 +23,8 @@
         "react": "19.0.0-rc-02c0e824-20241028",
         "react-dom": "19.0.0-rc-02c0e824-20241028",
         "tailwind-merge": "^2.5.4",
-        "tailwind-variants": "^0.2.1"
+        "tailwind-variants": "^0.2.1",
+        "thirdweb": "^5.66.0"
     },
     "devDependencies": {
         "@types/node": "^20",

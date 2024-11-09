@@ -1,9 +1,10 @@
 import "./globals.css";
 
-import { ConnectButton, Nav } from "@/components";
+import { Nav, WalletButtonRenderer } from "@/components";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { type PropsWithChildren } from "react";
+import { ThirdwebProvider } from "thirdweb/react";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -14,10 +15,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
     return (
         <html lang="en" className={`${GeistSans.variable} antialiased`}>
             <body>
-                <Nav>
-                    <ConnectButton />
-                </Nav>
-                {children}
+                <ThirdwebProvider>
+                    <Nav>
+                        <WalletButtonRenderer />
+                    </Nav>
+                    {children}
+                </ThirdwebProvider>
             </body>
         </html>
     );
