@@ -8,5 +8,7 @@ export * from "./Textarea";
 
 export * from "./GalleryCardItem";
 export * from "./HomeGallery";
+export * from "./IPFSImageUploaded";
+export * from "./MintNFTForm";
 export * from "./MintStepper";
 export * from "./WalletButtonRenderer";

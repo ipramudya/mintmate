@@ -4,6 +4,8 @@ import { sepolia } from "thirdweb/chains";
 const secretKey = process.env.THIRDWEB_SECRET_KEY;
 const clientId = process.env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID as string;
 
+export const contractAddress = process.env.NEXT_PUBLIC_SEPOLIA_CONTRACT_ADDRESS as string;
+
 /**
  * Creates a new instance of the thirdweb client, using the environment variables
  * for the client id and secret key.
@@ -17,5 +19,5 @@ export const client = createThirdwebClient(secretKey ? { secretKey } : { clientI
 export const contract = getContract({
     client,
     chain: sepolia,
-    address: process.env.NEXT_PUBLIC_SEPOLIA_CONTRACT_ADDRESS as string
+    address: contractAddress
 });
