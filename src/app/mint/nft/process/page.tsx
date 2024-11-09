@@ -1,6 +1,18 @@
 import { Button, Icon, InputField, InputLabel, Textarea } from "@/components";
+import { decodeBase64 } from "@/lib";
 
-export default function ProcessingPage() {
+export default async function ProcessingPage({
+    searchParams
+}: {
+    searchParams: Promise<{ [key: string]: string | undefined }>;
+}) {
+    const uri = (await searchParams).uri;
+
+    if (uri) {
+        const decodedUri = decodeBase64(uri);
+        console.log({ decodedUri });
+    }
+
     return (
         <div className="mx-auto flex w-full max-w-screen-lg">
             <div className="grid w-full grid-cols-2 gap-6">

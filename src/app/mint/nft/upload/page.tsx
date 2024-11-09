@@ -1,15 +1,17 @@
 "use client";
 
 import { Button, Icon } from "@/components";
+import { client, encodeBase64 } from "@/lib";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone, type DropzoneOptions, type FileRejection } from "react-dropzone";
 import { toast } from "sonner";
+import { upload } from "thirdweb/storage";
 
 type FileWithPreview = File & { preview: string };
 
-// const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB in bytes
-const MAX_FILE_SIZE = 100 * 1024; // 20MB in bytes
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB in bytes
 const DROPZONE_OPTIONS: DropzoneOptions = {
     maxSize: MAX_FILE_SIZE,
     multiple: false,
@@ -24,7 +26,9 @@ const DROPZONE_OPTIONS: DropzoneOptions = {
 };
 
 export default function UploadPage() {
+    const router = useRouter();
     const [files, setFiles] = useState<FileWithPreview[]>([]);
+    const [uploading, setUploading] = useState(false);
 
     const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[]) => {
         if (acceptedFiles.length > 0) {
@@ -61,6 +65,32 @@ export default function UploadPage() {
         return () => files.forEach((file) => URL.revokeObjectURL(file.preview));
     }, [files]);
 
+    async function handleUpload() {
+        if (files.length === 0) return;
+
+        setUploading(true);
+        let uri = "";
+        try {
+            // Exclude the preview from the upload
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { preview: _, ...file } = files[0];
+
+            uri = await upload({
+                client,
+                files: [file]
+            });
+        } catch (error) {
+            toast.error("Error uploading file to IPFS, detail: " + error);
+        } finally {
+            setUploading(false);
+        }
+
+        if (uri) {
+            const uriEncoded = encodeBase64(uri);
+            router.push(`/mint/nft/process?uri=${uriEncoded}`);
+        }
+    }
+
     return (
         <div className="mx-auto flex w-full max-w-[500px] flex-col">
             {/* dropzone wrapper */}
@@ -92,7 +122,13 @@ export default function UploadPage() {
                         <Icon.Refresh strokeWidth={3} />
                     </Button>
                 )}
-                <Button dimensions="lg" className="w-full rounded-lg" disabled>
+                <Button
+                    dimensions="lg"
+                    className="w-full rounded-lg"
+                    disabled={files.length === 0}
+                    onClick={handleUpload}
+                    loading={uploading}
+                >
                     Upload
                 </Button>
             </div>
