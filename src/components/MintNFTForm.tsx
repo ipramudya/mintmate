@@ -75,13 +75,13 @@ export function MintNFTForm({ ipfsURI }: Props) {
 
     const form = useForm<InputFields>();
 
-    const _handleSubmit = form.handleSubmit(async (data) => {
+    const handleSubmit = form.handleSubmit(async (data) => {
         const metadataURI = await uploadMetadataToIPFS(data);
         await mintNFT(metadataURI);
     });
 
     return (
-        <form className="flex flex-col space-y-6" onSubmit={_handleSubmit}>
+        <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-2">
                 <InputLabel aria-required htmlFor="name">
                     Name

@@ -9,8 +9,6 @@ import { useDropzone, type DropzoneOptions, type FileRejection } from "react-dro
 import { toast } from "sonner";
 import { upload } from "thirdweb/storage";
 
-type FileWithPreview = File & { preview: string };
-
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB in bytes
 const DROPZONE_OPTIONS: DropzoneOptions = {
     maxSize: MAX_FILE_SIZE,
@@ -27,24 +25,20 @@ const DROPZONE_OPTIONS: DropzoneOptions = {
 
 export default function UploadPage() {
     const router = useRouter();
-    const [filesToRender, setFilesToRender] = useState<FileWithPreview[]>([]);
+    const [assetObjectURL, setAssetObjectURL] = useState<string>("");
     const [uploading, setUploading] = useState(false);
 
     const onDrop = useCallback((acceptedFiles: File[], fileRejections: FileRejection[]) => {
         if (acceptedFiles.length > 0) {
-            setFilesToRender(
-                acceptedFiles.map((file) => {
-                    // Create a preview URL for the uploaded file
-                    // This is a temporary URL that will be revoked when the component is unmounted
-                    const preview = URL.createObjectURL(file);
+            const file = acceptedFiles[0];
 
-                    // Return a copy of the file with the preview URL
-                    return Object.assign(file, { preview });
-                })
-            );
+            // Create a preview URL for the uploaded file
+            // This is a temporary URL that will be revoked when the component is unmounted
+            const preview = URL.createObjectURL(file);
+            setAssetObjectURL(preview);
         }
 
-        // Alert every-single file, and errors if any
+        // Alert every-single file for error its may occur
         if (fileRejections.length > 0) {
             fileRejections.forEach((file) => {
                 file.errors.forEach((error) => {
@@ -62,11 +56,11 @@ export default function UploadPage() {
     useEffect(() => {
         // Revoke the object URL when the component unmounts or files state changes.
         // This is necessary to prevent memory leaks.
-        return () => filesToRender.forEach((file) => URL.revokeObjectURL(file.preview));
-    }, [filesToRender]);
+        return () => URL.revokeObjectURL(assetObjectURL);
+    }, [assetObjectURL]);
 
     async function handleUpload() {
-        if (filesToRender.length === 0) return;
+        if (!assetObjectURL && acceptedFiles.length === 0) return;
 
         setUploading(true);
         let uri = "";
@@ -97,15 +91,11 @@ export default function UploadPage() {
                         "flex h-[500px] items-center justify-center rounded-lg border border-dashed border-neutral-300 bg-neutral-50 p-10"
                 })}
             >
+                {/* Dropzone input holder */}
                 <input {...getInputProps()} />
-                {filesToRender.length > 0 ? (
+                {assetObjectURL.length > 0 ? (
                     <div className="relative h-full w-full overflow-hidden">
-                        <Image
-                            src={filesToRender[0].preview}
-                            alt="preview"
-                            objectFit="contain"
-                            fill
-                        />
+                        <Image src={assetObjectURL} alt="preview" objectFit="contain" fill />
                     </div>
                 ) : (
                     <div className="flex flex-col items-center">
@@ -119,7 +109,7 @@ export default function UploadPage() {
             </div>
             <div className="mt-4 flex items-center gap-4">
                 {/* choose another file button */}
-                {filesToRender.length > 0 && (
+                {assetObjectURL.length > 0 && (
                     <Button onClick={open} dimensions="lg" color="white" className="rounded-lg">
                         <Icon.Refresh strokeWidth={3} />
                     </Button>
@@ -127,7 +117,7 @@ export default function UploadPage() {
                 <Button
                     dimensions="lg"
                     className="w-full rounded-lg"
-                    disabled={filesToRender.length === 0}
+                    disabled={assetObjectURL.length === 0}
                     onClick={handleUpload}
                     loading={uploading}
                 >
