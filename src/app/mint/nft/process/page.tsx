@@ -21,7 +21,7 @@ export default async function ProcessingPage({
         <div className="mx-auto flex w-full max-w-screen-lg">
             <div className="grid w-full grid-cols-2 gap-6">
                 <IPFSImageUploaded ipfsURI={decodedURI} />
-                <MintNFTForm ipfsURI={decodedURI} />
+                <MintNFTForm ipfsURI={decodedURI} originalURI={uri} />
             </div>
         </div>
     );

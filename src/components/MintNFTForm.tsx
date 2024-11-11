@@ -2,6 +2,7 @@
 
 import { Button, InputField, InputLabel, Textarea } from "@/components";
 import { client, contract, contractAddress } from "@/lib";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -17,9 +18,11 @@ type InputFields = {
 
 interface Props {
     ipfsURI: string;
+    originalURI: string;
 }
 
-export function MintNFTForm({ ipfsURI }: Props) {
+export function MintNFTForm({ ipfsURI, originalURI }: Props) {
+    const router = useRouter();
     const { mutate: transact, isPending } = useSendTransaction({
         payModal: {
             theme: "dark"
@@ -65,7 +68,9 @@ export function MintNFTForm({ ipfsURI }: Props) {
 
         transact(transaction, {
             onSuccess: (data) => {
-                console.log("Success", data);
+                router.push(
+                    `/mint/nft/completed?uri=${originalURI}&transactionHash=${data.transactionHash}`
+                );
             },
             onError(error) {
                 toast.error(error.message);
