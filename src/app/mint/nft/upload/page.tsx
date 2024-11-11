@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import { useDropzone, type DropzoneOptions, type FileRejection } from "react-dropzone";
+import { HashLoader } from "react-spinners";
 import { toast } from "sonner";
 import { upload } from "thirdweb/storage";
 
@@ -18,8 +19,7 @@ const DROPZONE_OPTIONS: DropzoneOptions = {
         "image/svg+xml": [".svg"],
         "image/png": [".png"],
         "image/jpeg": [".jpg", ".jpeg"],
-        "image/gif": [".gif"],
-        "video/mp4": [".mp4"]
+        "image/gif": [".gif"]
     }
 };
 
@@ -82,6 +82,18 @@ export default function UploadPage() {
         }
     }
 
+    if (uploading) {
+        return (
+            <div className="mx-auto flex w-full max-w-[400px] flex-col items-center text-center">
+                <div className="mb-4">
+                    <HashLoader size={48} color="#3b82f6" />
+                </div>
+                <h2 className="text-2xl font-bold md:text-3xl">Uploading media to IPFS</h2>
+                <p className="mt-2 text-sm text-neutral-700 md:text-base">Please wait...</p>
+            </div>
+        );
+    }
+
     return (
         <div className="mx-auto flex w-full max-w-[500px] flex-col">
             {/* dropzone wrapper */}
@@ -103,7 +115,7 @@ export default function UploadPage() {
                         <p className="mt-2 text-sm">
                             <strong className="text-inherit">Click the box</strong> or drag and drop
                         </p>
-                        <p className="text-sm">SVG, PNG, JPG, GIF or MP4 (max. 20MB)</p>
+                        <p className="text-sm">SVG, PNG, JPG, or GIF (max. 20MB)</p>
                     </div>
                 )}
             </div>

@@ -5,6 +5,7 @@ import { client, contract, contractAddress, encodeBase64 } from "@/lib";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { HashLoader } from "react-spinners";
 import { toast } from "sonner";
 import { prepareContractCall } from "thirdweb";
 import { useSendTransaction } from "thirdweb/react";
@@ -99,7 +100,18 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
     });
 
     return (
-        <form className="flex flex-col space-y-6" onSubmit={handleSubmit}>
+        <form className="relative flex flex-col space-y-6" onSubmit={handleSubmit}>
+            {isPending && (
+                <div className="absolute left-1/2 top-1/2 h-[calc(100%+16px)] w-[calc(100%+16px)] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-neutral-200/10 backdrop-blur-[2px]">
+                    <div className="flex h-full w-full flex-col items-center justify-center">
+                        <HashLoader size={32} color="#3b82f6" />
+                        <p className="mt-2 text-sm font-semibold">Minting your NFT Art</p>
+                        <p className="text-sm text-neutral-500">
+                            Pease wait while we&apos;re minting your art, it will be quick.
+                        </p>
+                    </div>
+                </div>
+            )}
             <div className="space-y-2">
                 <InputLabel aria-required htmlFor="name">
                     Name
