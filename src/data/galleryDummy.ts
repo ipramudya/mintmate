@@ -1,77 +1,62 @@
 export const DummyNFTGallery = [
     {
         name: "Ethereal Sunrise",
-        description: "A beautiful sunrise captured on the Ethereum blockchain.",
-        price: "0.0456"
+        description: "A beautiful sunrise captured on the Ethereum blockchain."
     },
     {
         name: "Cyber Samurai",
-        description: "A futuristic samurai ready to protect the blockchain.",
-        price: "0.1254"
+        description: "A futuristic samurai ready to protect the blockchain."
     },
     {
         name: "Pixel Paradise",
-        description: "A serene pixelated landscape for the retro enthusiasts.",
-        price: "0.0102"
+        description: "A serene pixelated landscape for the retro enthusiasts."
     },
     {
         name: "Astronaut Ape",
-        description: "An ape exploring the depths of space.",
-        price: "0.0333"
+        description: "An ape exploring the depths of space."
     },
     {
         name: "Galactic Goddess",
-        description: "An ethereal entity ruling over the digital cosmos.",
-        price: "0.0728"
+        description: "An ethereal entity ruling over the digital cosmos."
     },
     {
         name: "Mystic Forest",
-        description: "A dark, enchanted forest full of secrets.",
-        price: "0.0957"
+        description: "A dark, enchanted forest full of secrets."
     },
     {
         name: "Neon Dragon",
-        description: "A dragon glowing with vibrant neon lights.",
-        price: "0.1500"
+        description: "A dragon glowing with vibrant neon lights."
     },
     {
         name: "Digital Nomad",
-        description: "A wanderer in the vast digital landscape.",
-        price: "0.2001"
+        description: "A wanderer in the vast digital landscape."
     },
     {
         name: "Crypto Phoenix",
-        description: "A phoenix rising from the ashes of transactions.",
-        price: "0.0588"
+        description: "A phoenix rising from the ashes of transactions."
     },
     {
         name: "Virtual Reality",
-        description: "A surreal representation of virtual reality in art form.",
-        price: "0.0145"
+        description: "A surreal representation of virtual reality in art form."
     },
     {
         name: "The Void",
-        description: "An abstract representation of the void in cyberspace.",
-        price: "0.0999"
+        description: "An abstract representation of the void in cyberspace."
     },
     {
         name: "Lost in the Metaverse",
-        description: "A character trying to find their way in the metaverse.",
-        price: "0.1803"
+        description: "A character trying to find their way in the metaverse."
     },
     {
         name: "Golden Hour",
-        description: "A mesmerizing digital sunset glowing with golden hues.",
-        price: "0.0050"
+        description: "A mesmerizing digital sunset glowing with golden hues."
     },
     {
         name: "Blockchain Botanist",
-        description: "A botanist bringing life to the blockchain.",
-        price: "0.2229"
+        description: "A botanist bringing life to the blockchain."
     },
     {
         name: "Quantum Monk",
-        description: "A monk meditating amidst a quantum world.",
-        price: "0.0791"
+        description: "A monk meditating amidst a quantum world."
     }
 ];

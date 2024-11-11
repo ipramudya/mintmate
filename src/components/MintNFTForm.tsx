@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, InputField, InputLabel, Textarea } from "@/components";
-import { client, contract, contractAddress } from "@/lib";
+import { client, contract, contractAddress, encodeBase64 } from "@/lib";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -10,10 +10,14 @@ import { prepareContractCall } from "thirdweb";
 import { useSendTransaction } from "thirdweb/react";
 import { upload } from "thirdweb/storage";
 
-type InputFields = {
+type FormFields = {
     name: string;
     description: string;
     externalURL: string;
+};
+
+type MintingResult = FormFields & {
+    transactionHash: string;
 };
 
 interface Props {
@@ -37,7 +41,7 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         name,
         description,
         externalURL
-    }: InputFields): Promise<string> {
+    }: FormFields): Promise<string> {
         const filename = name.split(" ").join("-") + "_metadata.json";
         const metadataURI = await upload({
             client,
@@ -59,7 +63,7 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         return metadataURI;
     }
 
-    async function mintNFT(metadataURI: string) {
+    async function mintNFT(metadataURI: string, formData: FormFields) {
         const transaction = prepareContractCall({
             contract,
             method: "function mintNFT(address recipient, string tokenURI) returns (uint256)",
@@ -68,8 +72,17 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
 
         transact(transaction, {
             onSuccess: (data) => {
+                const result: MintingResult = {
+                    name: formData.name,
+                    description: formData.description,
+                    externalURL: formData.externalURL,
+                    transactionHash: data.transactionHash
+                };
+
+                const encodeMintResult = encodeBase64(JSON.stringify(result));
+
                 router.push(
-                    `/mint/nft/completed?uri=${originalURI}&transactionHash=${data.transactionHash}`
+                    `/mint/nft/completed?uri=${originalURI}&mintResultEncoded=${encodeMintResult}`
                 );
             },
             onError(error) {
@@ -78,11 +91,11 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         });
     }
 
-    const form = useForm<InputFields>();
+    const form = useForm<FormFields>();
 
-    const handleSubmit = form.handleSubmit(async (data) => {
-        const metadataURI = await uploadMetadataToIPFS(data);
-        await mintNFT(metadataURI);
+    const handleSubmit = form.handleSubmit(async (formData) => {
+        const metadataURI = await uploadMetadataToIPFS(formData);
+        await mintNFT(metadataURI, formData);
     });
 
     return (
