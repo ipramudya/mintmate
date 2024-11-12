@@ -18,7 +18,7 @@ export function Nav({ children, className }: Props) {
     return (
         <nav
             className={cn(
-                "sticky left-0 top-0 mx-auto flex h-16 max-w-screen-lg items-center justify-center bg-white px-2 md:px-4",
+                "sticky left-0 top-0 z-10 mx-auto flex h-16 max-w-screen-lg items-center justify-center bg-white px-2 md:px-4",
                 className
             )}
         >
