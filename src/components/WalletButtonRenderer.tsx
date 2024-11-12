@@ -2,6 +2,7 @@
 
 import { client, truncateAddress } from "@/lib";
 import { useMemo } from "react";
+import { toast } from "sonner";
 import { sepolia } from "thirdweb/chains";
 import {
     useActiveAccount,
@@ -30,10 +31,12 @@ export function WalletButtonRenderer() {
 function ConnectButton() {
     const { connect, isConnecting } = useConnectModal();
 
-    async function handleConnect() {
-        await connect({
+    function handleConnect() {
+        connect({
             client,
             chain: sepolia
+        }).catch(() => {
+            toast("Connect wallet got canceled");
         });
     }
 

@@ -4,6 +4,7 @@ import { cn } from "@/lib";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type PropsWithChildren } from "react";
+import { useActiveAccount } from "thirdweb/react";
 import { Button } from "./Button";
 
 interface Props extends PropsWithChildren {
@@ -12,6 +13,7 @@ interface Props extends PropsWithChildren {
 
 export function Nav({ children, className }: Props) {
     const router = useRouter();
+    const account = useActiveAccount();
 
     return (
         <nav
@@ -35,9 +37,11 @@ export function Nav({ children, className }: Props) {
                 </div>
                 {/* left side */}
                 <div className="flex items-center gap-2 md:gap-4">
-                    <Button color="secondary" onClick={() => router.push("/mint/nft/upload")}>
-                        Mint
-                    </Button>
+                    {account && (
+                        <Button color="secondary" onClick={() => router.push("/mint/nft/upload")}>
+                            Mint
+                        </Button>
+                    )}
                     {/* `children` rendered as profile button or connect button */}
                     {children}
                 </div>
