@@ -6,11 +6,14 @@ export * from "./InputLabel";
 export * from "./Nav";
 export * from "./Textarea";
 
+export * from "./Gallery";
 export * from "./GalleryCardItem";
 export * from "./HomeGallery";
 export * from "./IPFSImageUploaded";
+export * from "./JotaiProvider";
 export * from "./MintedNFTCard";
 export * from "./MintNFTForm";
 export * from "./MintStepper";
 export * from "./RemintButton";
+export * from "./SearchGalleryInput";
 export * from "./WalletButtonRenderer";

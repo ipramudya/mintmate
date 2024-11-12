@@ -1,4 +1,4 @@
-import { InputField } from "@/components";
+import { SearchGalleryInput } from "@/components";
 import { PropsWithChildren } from "react";
 
 export default function Layout({ children }: PropsWithChildren) {
@@ -7,7 +7,7 @@ export default function Layout({ children }: PropsWithChildren) {
             <header className="mt-[100px] flex items-center justify-between">
                 <h2 className="text-2xl font-bold md:text-3xl">Gallery</h2>
                 <div className="w-full max-w-[300px]">
-                    <InputField color="secondary" placeholder="Browse NFT..." />
+                    <SearchGalleryInput />
                 </div>
             </header>
             {children}

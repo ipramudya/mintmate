@@ -1,18 +1,20 @@
-import { GalleryCardItem } from "@/components";
+import { Gallery } from "@/components";
 import { getAllIPFSData, retrieveTokenURIs } from "@/lib";
+
+type ERC721Metadata = {
+    name: string;
+    description: string;
+    image: string;
+};
 
 export default async function GalleryPage() {
     const tokenURIs = await retrieveTokenURIs();
     const ipfsData = await getAllIPFSData(tokenURIs);
 
     // I accidently added a "data" field to the IPFS data, so I need to extract it
-    const extractDataFields = ipfsData.map((item) => (item.data ? item.data : item));
+    const extractDataFields = ipfsData.map((item) =>
+        item.data ? item.data : item
+    ) as ERC721Metadata[];
 
-    return (
-        <section className="mt-10 grid gap-2 pb-10 sm:grid-cols-2 md:grid-cols-3 md:gap-4">
-            {extractDataFields.map((item, index) => (
-                <GalleryCardItem key={`gallery-${index}`} {...item} />
-            ))}
-        </section>
-    );
+    return <Gallery galleryData={extractDataFields} />;
 }

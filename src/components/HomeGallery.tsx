@@ -20,7 +20,7 @@ const MobileGallery = () =>
             key={`gallery-${index}`}
             className="relative aspect-square w-full overflow-hidden rounded-md rounded-t bg-neutral-200"
         >
-            <Image src={item.src} alt={item.alt} objectFit="cover" fill />
+            <Image src={item.src} alt={item.alt} className="object-cover" fill />
         </div>
     ));
 
@@ -42,7 +42,7 @@ const DesktopCarousel = () => {
                             key={`gallery-${index}`}
                             className="relative aspect-square w-full overflow-hidden rounded-md rounded-t bg-neutral-200"
                         >
-                            <Image src={img.src} alt={img.alt} objectFit="cover" fill />
+                            <Image src={img.src} alt={img.alt} className="object-cover" fill />
                         </div>
                     </HomeGalleryCarouselItem>
                 ))}

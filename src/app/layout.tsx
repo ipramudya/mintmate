@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Nav, WalletButtonRenderer } from "@/components";
+import { JotaiProvider, Nav, WalletButtonRenderer } from "@/components";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { type PropsWithChildren } from "react";
@@ -18,10 +18,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <body>
                 <Toaster position="top-center" duration={5000} closeButton richColors />
                 <ThirdwebProvider>
-                    <Nav>
-                        <WalletButtonRenderer />
-                    </Nav>
-                    {children}
+                    <JotaiProvider>
+                        <Nav>
+                            <WalletButtonRenderer />
+                        </Nav>
+                        {children}
+                    </JotaiProvider>
                 </ThirdwebProvider>
             </body>
         </html>

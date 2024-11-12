@@ -107,7 +107,7 @@ export default function UploadPage() {
                 <input {...getInputProps()} />
                 {assetObjectURL.length > 0 ? (
                     <div className="relative h-full w-full overflow-hidden">
-                        <Image src={assetObjectURL} alt="preview" objectFit="contain" fill />
+                        <Image src={assetObjectURL} alt="preview" className="object-contain" fill />
                     </div>
                 ) : (
                     <div className="flex flex-col items-center">
