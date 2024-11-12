@@ -43,19 +43,14 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         description,
         externalURL
     }: FormFields): Promise<string> {
-        const filename = name.split(" ").join("-") + "_metadata.json";
         const metadataURI = await upload({
             client,
             files: [
                 {
-                    name: filename,
-                    type: "application/json",
-                    data: {
-                        name,
-                        description,
-                        externalURL,
-                        image: ipfsURI
-                    }
+                    name,
+                    description,
+                    externalURL,
+                    image: ipfsURI
                 }
             ],
             uploadWithoutDirectory: true

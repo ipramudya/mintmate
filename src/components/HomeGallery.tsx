@@ -33,7 +33,10 @@ const DesktopCarousel = () => {
             <div className="-ml-4 flex">
                 {DummyNFTGallery.map((item, index) => (
                     <HomeGalleryCarouselItem key={`gallery-desktop-${index}`}>
-                        <GalleryCardItem {...item} imageSrc="" />
+                        <div
+                            key={`gallery-${index}`}
+                            className="h-72 w-full animate-pulse rounded-t bg-neutral-200"
+                        ></div>
                     </HomeGalleryCarouselItem>
                 ))}
             </div>
