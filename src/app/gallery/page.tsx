@@ -24,3 +24,5 @@ export const metadata: Metadata = {
     title: "Mintmate - Gallery",
     description: "Mintmate gallery page, you can explore showcased nft on our gallery."
 };
+
+export const dynamic = "force-dynamic";

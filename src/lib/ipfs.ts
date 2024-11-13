@@ -40,7 +40,7 @@ export async function getAllIPFSData(ipfsURIs: string[]): Promise<any[]> {
     const responses = await Promise.all(
         remappedURIs.map(async (uri) => {
             try {
-                const response = await fetch(uri);
+                const response = await fetch(uri, { cache: "no-store" });
 
                 // Check if response is successful
                 if (response.ok) {
