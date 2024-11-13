@@ -1,5 +1,5 @@
 import { Banner, HomeGallery } from "@/components";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 
 export default function Home() {
     return (

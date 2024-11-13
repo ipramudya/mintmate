@@ -1,6 +1,6 @@
 import { IPFSImageUploaded, MintNFTForm } from "@/components";
 import { checkIPFSUri, decodeBase64 } from "@/lib";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 import { redirect } from "next/navigation";
 
 const REDIRECT_URL = "/mint/nft/upload";

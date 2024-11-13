@@ -1,6 +1,6 @@
 import { Gallery } from "@/components";
 import { getAllIPFSData, retrieveTokenURIs } from "@/lib";
-import { Metadata } from "next";
+import { type Metadata } from "next";
 
 type ERC721Metadata = {
     name: string;
