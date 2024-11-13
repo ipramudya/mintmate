@@ -37,7 +37,7 @@ export function MintedNFTCard(props: Props) {
                             </div>
                         )}
                         <h3 className="text-base font-semibold text-white">{props.name}</h3>
-                        <p className="line-clamp-2 min-h-[48px] text-sm text-neutral-400">
+                        <p className="line-clamp-2 h-[40px] text-sm text-neutral-400">
                             {props.description}
                         </p>
                         <p className="mt-3 text-xs text-neutral-400">

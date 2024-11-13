@@ -26,7 +26,15 @@ export async function checkIPFSUri(uri: string): Promise<boolean> {
  * @returns {Promise<any[]>} An array of data fetched from the IPFS URIs.
  */
 export async function getAllIPFSData(ipfsURIs: string[]): Promise<any[]> {
-    const remappedURIs = ipfsURIs.map((uri) => uri.replace("ipfs://", "https://ipfs.io/ipfs/"));
+    const remappedURIs = [];
+
+    for (const uri of ipfsURIs) {
+        if (uri.startsWith("ipfs://")) {
+            remappedURIs.push(uri.replace("ipfs://", "https://ipfs.io/ipfs/"));
+        } else {
+            continue;
+        }
+    }
 
     // fetch the data from each URI and wait for all the promises to resolve
     const responses = await Promise.all(

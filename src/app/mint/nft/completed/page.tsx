@@ -29,7 +29,7 @@ export default async function CompletedPage({
     const mintResult = JSON.parse(decodeBase64(mintResultEncoded)) as MintingResult;
 
     return (
-        <div className="mx-auto flex w-full max-w-[500px] flex-col">
+        <div className="mx-auto mb-8 flex w-full max-w-[500px] flex-col">
             <div className="text-center">
                 <h2 className="text-2xl font-bold md:text-3xl">Congratulations</h2>
                 <p className="text-sm">

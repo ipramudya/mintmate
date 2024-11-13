@@ -11,10 +11,10 @@ export default async function GalleryPage() {
     const tokenURIs = await retrieveTokenURIs();
     const ipfsData = await getAllIPFSData(tokenURIs);
 
-    // I accidently added a "data" field to the IPFS data, so I need to extract it
-    const extractDataFields = ipfsData.map((item) =>
-        item.data ? item.data : item
-    ) as ERC721Metadata[];
+    // // I accidently added a "data" field to the IPFS data, so I need to extract it
+    const extractDataFields = ipfsData
+        .filter((item) => Boolean(item)) // filter out undefined items
+        .map((item) => (item.data ? item.data : item)) as ERC721Metadata[];
 
     return <Gallery galleryData={extractDataFields} />;
 }

@@ -3,7 +3,6 @@
 import { Button, InputField, InputLabel, Textarea } from "@/components";
 import { client, contract, contractAddress, encodeBase64 } from "@/lib";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { HashLoader } from "react-spinners";
 import { toast } from "sonner";
@@ -33,10 +32,6 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
             theme: "dark"
         }
     });
-
-    useEffect(() => {
-        console.log({ isPending });
-    }, [isPending]);
 
     async function uploadMetadataToIPFS({
         name,
@@ -92,6 +87,7 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
     const handleSubmit = form.handleSubmit(async (formData) => {
         const metadataURI = await uploadMetadataToIPFS(formData);
         await mintNFT(metadataURI, formData);
+        form.reset();
     });
 
     return (
