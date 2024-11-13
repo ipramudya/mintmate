@@ -2,6 +2,7 @@
 
 import { Button, Icon } from "@/components";
 import { client, encodeBase64 } from "@/lib";
+import { Metadata } from "next";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -139,3 +140,8 @@ export default function UploadPage() {
         </div>
     );
 }
+
+export const metadata: Metadata = {
+    title: "Mintmate - Upload NFT",
+    description: "Mintmate upload page, you can upload your nft to mint."
+};

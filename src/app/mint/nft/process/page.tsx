@@ -1,5 +1,6 @@
 import { IPFSImageUploaded, MintNFTForm } from "@/components";
 import { checkIPFSUri, decodeBase64 } from "@/lib";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 const REDIRECT_URL = "/mint/nft/upload";
@@ -26,3 +27,8 @@ export default async function ProcessingPage({
         </div>
     );
 }
+
+export const metadata: Metadata = {
+    title: "Mintmate - Process NFT",
+    description: "Mintmate process page, you can process your nft to mint."
+};

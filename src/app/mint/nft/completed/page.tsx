@@ -1,5 +1,6 @@
 import { MintedNFTCard, RemintButton } from "@/components";
 import { checkIPFSUri, decodeBase64 } from "@/lib";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 type MintingResult = {
@@ -41,3 +42,8 @@ export default async function CompletedPage({
         </div>
     );
 }
+
+export const metadata: Metadata = {
+    title: "Mintmate - Completed",
+    description: "Mintmate completed page, you can see your minted nft."
+};

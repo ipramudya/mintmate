@@ -33,11 +33,20 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         }
     });
 
+    /**
+     * Uploads the metadata to IPFS, and returns the URI of the uploaded file.
+     *
+     * @param {FormFields} formData - The form data to upload.
+     * @returns {Promise<string>} The URI of the uploaded file.
+     */
     async function uploadMetadataToIPFS({
         name,
         description,
         externalURL
     }: FormFields): Promise<string> {
+        // Upload the metadata to IPFS, and return the URI of the uploaded file.
+        // The `uploadWithoutDirectory` option is set to true, so
+        // that the file is uploaded directly to the root of the IPFS host.
         const metadataURI = await upload({
             client,
             files: [
@@ -45,6 +54,8 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
                     name,
                     description,
                     externalURL,
+                    // The image is the IPFS URI passed as a prop.
+                    // This is the URI of the image that was previously uploaded.
                     image: ipfsURI
                 }
             ],
@@ -54,6 +65,12 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         return metadataURI;
     }
 
+    /**
+     * Mints a new NFT on the contract with the given metadata URI.
+     *
+     * @param {string} metadataURI - The URI of the metadata file uploaded to IPFS.
+     * @param {FormFields} formData - The form data (name, description, externalURL) to mint the NFT with.
+     */
     async function mintNFT(metadataURI: string, formData: FormFields) {
         const transaction = prepareContractCall({
             contract,
@@ -63,6 +80,7 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
 
         transact(transaction, {
             onSuccess: (data) => {
+                // On success, encode the mint result as a JSON string, and redirect to the completed page.
                 const result: MintingResult = {
                     name: formData.name,
                     description: formData.description,
@@ -77,6 +95,7 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
                 );
             },
             onError(error) {
+                // On error, show an error toast with the error message.
                 toast.error(error.message);
             }
         });

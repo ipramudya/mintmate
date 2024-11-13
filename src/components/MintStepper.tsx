@@ -1,6 +1,6 @@
 "use client";
 
-import { MintSteps } from "@/data/mintStepper";
+import { MintSteps } from "@/constant/mintStepper";
 import { cn } from "@/lib";
 import { usePathname } from "next/navigation";
 
