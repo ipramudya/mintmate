@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { HashLoader } from "react-spinners";
 import { toast } from "sonner";
 import { prepareContractCall } from "thirdweb";
-import { useSendTransaction } from "thirdweb/react";
+import { useSendAndConfirmTransaction } from "thirdweb/react";
 import { upload } from "thirdweb/storage";
 
 type FormFields = {
@@ -27,11 +27,7 @@ interface Props {
 
 export function MintNFTForm({ ipfsURI, originalURI }: Props) {
     const router = useRouter();
-    const { mutate: transact, isPending } = useSendTransaction({
-        payModal: {
-            theme: "dark"
-        }
-    });
+    const { mutate: transactAndConfirm, isPending } = useSendAndConfirmTransaction();
 
     /**
      * Uploads the metadata to IPFS, and returns the URI of the uploaded file.
@@ -78,24 +74,21 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
             params: [contractAddress, metadataURI]
         });
 
-        transact(transaction, {
-            onSuccess: (data) => {
-                // On success, encode the mint result as a JSON string, and redirect to the completed page.
+        transactAndConfirm(transaction, {
+            onSuccess: (receipt) => {
                 const result: MintingResult = {
                     name: formData.name,
                     description: formData.description,
                     externalURL: formData.externalURL,
-                    transactionHash: data.transactionHash
+                    transactionHash: receipt.transactionHash
                 };
 
                 const encodeMintResult = encodeBase64(JSON.stringify(result));
-
                 router.push(
                     `/mint/nft/completed?uri=${originalURI}&mintResultEncoded=${encodeMintResult}`
                 );
             },
             onError(error) {
-                // On error, show an error toast with the error message.
                 toast.error(error.message);
             }
         });
@@ -165,3 +158,5 @@ export function MintNFTForm({ ipfsURI, originalURI }: Props) {
         </form>
     );
 }
+
+//
